@@ -1,0 +1,54 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Supermercados App RGA-SYSTEM 2020",
+        "contact": {
+            "name": "Programador Principal",
+            "email": "joseascurra123@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/operaciones/{category}/productos": {
+            "delete": {
+                "tags": [
+                    "Acciones"
+                ],
+                "operationId": "/sample/category/things",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Especificamos la categoria del producto que queremos visualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "criteria",
+                        "in": "query",
+                        "description": "Some optional other parameter",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        }
+    }
+}
