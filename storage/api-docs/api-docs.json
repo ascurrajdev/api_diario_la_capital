@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Supermercados App RGA-SYSTEM 2020",
+        "title": "API Diario La Capital 2020",
         "contact": {
             "name": "Programador Principal",
             "email": "joseascurra123@gmail.com"
@@ -9,27 +9,36 @@
         "version": "1.0"
     },
     "paths": {
-        "/operaciones/{category}/productos": {
-            "delete": {
+        "/api/categorias": {
+            "get": {
                 "tags": [
-                    "Acciones"
+                    "Categorias"
                 ],
-                "operationId": "/sample/category/things",
+                "operationId": "App\\Http\\Controllers\\CategoriasController::index",
+                "responses": {
+                    "200": {
+                        "description": "Retorna todas las categorias de noticias existentes",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categorias/{id}": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "operationId": "App\\Http\\Controllers\\CategoriasController::show",
                 "parameters": [
                     {
-                        "name": "category",
+                        "name": "id",
                         "in": "path",
-                        "description": "Especificamos la categoria del producto que queremos visualizar",
+                        "description": "En este parametro introducimos la id de la categoria a mostrar",
                         "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "criteria",
-                        "in": "query",
-                        "description": "Some optional other parameter",
-                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -37,7 +46,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Returns some sample category things",
+                        "description": "Retorna la categoria filtrada por el id",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -45,7 +54,123 @@
                         }
                     },
                     "400": {
-                        "description": "Error: Bad request. When required parameters were not supplied."
+                        "description": "No se especifico el id",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/encuestas": {
+            "get": {
+                "tags": [
+                    "Encuestas"
+                ],
+                "operationId": "App\\Http\\Controllers\\EncuestaController::index",
+                "responses": {
+                    "200": {
+                        "description": "Obtiene todas las encuestas en formato json",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/encuestas/{id}": {
+            "get": {
+                "tags": [
+                    "Encuestas"
+                ],
+                "operationId": "App\\Http\\Controllers\\EncuestaController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "La id unica de la encuesta a visualizar",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Obtiene la encuesta fitrada por el id",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/posts": {
+            "get": {
+                "tags": [
+                    "Noticias"
+                ],
+                "operationId": "App\\Http\\Controllers\\PostController::index",
+                "responses": {
+                    "200": {
+                        "description": "Se obtienen todas las noticias del dia en un formato json",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/posts/{id}": {
+            "get": {
+                "tags": [
+                    "Noticias"
+                ],
+                "operationId": "App\\Http\\Controllers\\PostController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "La id unica de la noticia a visualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Obtiene en formato json la noticia",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/vistas": {
+            "get": {
+                "tags": [
+                    "Visitas"
+                ],
+                "operationId": "App\\Http\\Controllers\\VistaController::index",
+                "responses": {
+                    "200": {
+                        "description": "Obtiene todas las visitas",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }

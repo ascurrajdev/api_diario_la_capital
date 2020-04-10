@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,5 +11,18 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return response()->json([
+        "message" => "El framework funciona correctamente"
+    ],201);
 });
+
+$router->get('api/posts',"PostController@index");
+$router->get('api/posts/{id}',"PostController@show");
+
+$router->get('api/categorias','CategoriasController@index');
+$router->get('api/categorias/{id}','CategoriasController@show');
+
+$router->get('api/encuestas','EncuestaController@index');
+$router->get('api/encuestas/{id}','EncuestaController@show');
+
+$router->get('api/vistas','VistaController@index');
