@@ -108,6 +108,48 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Encuestas"
+                ],
+                "operationId": "App\\Http\\Controllers\\EncuestaController::nuevaRespuesta",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "La id unica de la encuesta a registrar la nueva respuesta",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "opcion",
+                        "in": "query",
+                        "description": "La opcion de la encuesta que elige el usuario",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "comentario",
+                        "in": "query",
+                        "description": "El comentario que realiza de acuerdo a la opcion elegida por el usuario",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Devuelve la respuesta realizada en formato json",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/posts": {

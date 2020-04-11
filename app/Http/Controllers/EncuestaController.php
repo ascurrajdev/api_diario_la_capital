@@ -1,9 +1,13 @@
 <?php 
 
 namespace App\Http\Controllers;
+
 use App\Http\Resources\EncuestaCollection;
 use App\Encuesta;
+use App\Respuesta;
+use Illuminate\Http\Request;
 use App\Http\Resources\Json\EncuestaJson;
+
 class EncuestaController extends Controller{
     public function __construct(){}
 
@@ -41,5 +45,43 @@ class EncuestaController extends Controller{
      */
     public function show($id){
         return new EncuestaJson(Encuesta::find($id));
+    }
+    /**
+     * @OA\Post(
+     *      path="/api/encuestas/{id}",
+     *      tags={"Encuestas"},
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="La id unica de la encuesta a registrar la nueva respuesta",
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Parameter(
+     *          name="opcion",
+     *          in="query",
+     *          description="La opcion de la encuesta que elige el usuario",
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Parameter(
+     *          name="comentario",
+     *          in="query",
+     *          description="El comentario que realiza de acuerdo a la opcion elegida por el usuario",
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Response(
+     *          response="200",
+     *          description="Devuelve la respuesta realizada en formato json",
+     *          @OA\JsonContent(),
+     *      ),
+     * ),
+     */
+    public function nuevaRespuesta(Request $request,$id){
+        $respuesta = new Respuesta;
+        $respuesta->id = null;
+        $respuesta->encuesta_id = $id;
+        $respuesta->opcion_id = $request->input('opcion');
+        $respuesta->comentario = $request->input('comentario');
+        $respuesta->save();
+        return $request->ip();
     }
 }
