@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Database\QueryException;
 use Throwable;
-
+use Illuminate\Http\Response;
+use App\Traits\ApiResponse;
 class Handler extends ExceptionHandler
 {
+    use ApiResponse;
     /**
      * A list of the exception types that should not be reported.
      *
@@ -21,6 +24,7 @@ class Handler extends ExceptionHandler
         HttpException::class,
         ModelNotFoundException::class,
         ValidationException::class,
+        QueryException::class,
     ];
 
     /**
@@ -49,6 +53,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if($exception instanceof ValidationException){
+            return $this->errorResponse("Introduzca los datos",Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        /*if($exception instanceof QueryException){
+            return $this->errorResponse("El email ya esta siendo utilizado",Response::HTTP_UNPROCESSABLE_ENTITY);
+        }*/
+        //return $exception;
         return parent::render($request, $exception);
     }
 }

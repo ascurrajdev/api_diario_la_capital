@@ -23,7 +23,7 @@ class EncuestaController extends Controller{
      * ),
      */
     public function index(){
-        return new EncuestaCollection(Encuesta::all());
+        return new EncuestaCollection(Encuesta::take(10)->orderBy('id','desc')->get());
     }
 
     /**
@@ -44,7 +44,7 @@ class EncuestaController extends Controller{
      * ),
      */
     public function show($id){
-        return new EncuestaJson(Encuesta::find($id));
+        return new EncuestaJson(Encuesta::findOrFail($id));
     }
     /**
      * @OA\Post(

@@ -44,7 +44,7 @@ class CategoriasController extends Controller{
      */
     public function show($id){
         if($id){
-            return new CategoriasJson(Categoria::find($id));
+            return new CategoriasJson(Categoria::findOrFail($id));
         }else{
             return response()->json([
                 "message" => "Por favor introduzca el id de la categoria"

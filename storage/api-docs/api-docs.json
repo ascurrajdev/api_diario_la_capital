@@ -152,6 +152,50 @@
                 }
             }
         },
+        "/api/lector": {
+            "post": {
+                "tags": [
+                    "Lectores"
+                ],
+                "operationId": "App\\Http\\Controllers\\LectoresController::store",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "query",
+                        "description": "Indica el nombre del lector",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "apellido",
+                        "in": "query",
+                        "description": "Indica el apellido del lector",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Indica el correo del lector",
+                        "schema": {
+                            "type": "email"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna el lector registrado en formato json",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/posts": {
             "get": {
                 "tags": [

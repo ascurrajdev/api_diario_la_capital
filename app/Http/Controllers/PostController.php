@@ -2,8 +2,11 @@
 namespace App\Http\Controllers;
 use App\Post;
 use App\Vista;
+use App\Categoria;
+use App\Http\Resources\Json\CategoriasJson;
 use App\Http\Resources\PostsCollection;
 use App\Http\Resources\Json\PostsJson;
+use App\Country;
 class PostController extends Controller{
     public function __contruct(){}
 
@@ -19,7 +22,8 @@ class PostController extends Controller{
      * ),
      */
     public function index(){
-        return new PostsCollection(Post::all());
+        //return CategoriasJson::collection(Categoria::all());
+        return new PostsCollection(Post::orderBy('id','desc')->take(5)->get());
     }
 
     /**

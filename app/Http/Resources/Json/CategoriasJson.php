@@ -6,7 +6,7 @@ class CategoriasJson extends JsonResource{
         return [
             'id'=>$this->id,
             'nombre' => $this->nombre_categoria,
-            'noticias'=> PostsJson::collection($this->posts),
+            'noticias'=> PostsJson::collection($this->posts()->orderBy('id','desc')->take(2)->get()),
         ];
     }
 }

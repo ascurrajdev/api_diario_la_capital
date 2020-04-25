@@ -27,3 +27,5 @@ $router->get('api/encuestas/{id}','EncuestaController@show');
 $router->post('api/encuestas/{id}','EncuestaController@nuevaRespuesta');
 
 $router->get('api/vistas','VistaController@index');
+
+$router->post('api/lector','LectoresController@store');
