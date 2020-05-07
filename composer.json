@@ -8,7 +8,8 @@
         "php": "^7.2.5",
         "darkaonline/swagger-lume": "^7.0",
         "laravel/lumen-framework": "^7.0",
-        "pusher/pusher-php-server": "^4.1"
+        "pusher/pusher-php-server": "^4.1",
+        "victorybiz/geoip-location": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",

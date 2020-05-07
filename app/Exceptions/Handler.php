@@ -20,11 +20,11 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        AuthorizationException::class,
-        HttpException::class,
-        ModelNotFoundException::class,
-        ValidationException::class,
-        QueryException::class,
+        //AuthorizationException::class,
+        //HttpException::class,
+        //ModelNotFoundException::class,
+        //ValidationException::class,
+        //QueryException::class,
     ];
 
     /**
@@ -56,8 +56,14 @@ class Handler extends ExceptionHandler
         if($exception instanceof ValidationException){
             return $this->errorResponse("Introduzca los datos",Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+        if($exception instanceof ModelNotFoundException){
+            return $this->errorResponse($exception->getMessage(),Response::HTTP_NOT_FOUND);
+        }
         /*if($exception instanceof QueryException){
-            return $this->errorResponse("El email ya esta siendo utilizado",Response::HTTP_UNPROCESSABLE_ENTITY);
+            if($exception->errorInfo[1] === 1452){
+                return $this->errorResponse("Hola",422);
+            }
+            //return $this->errorResponse("El email ya esta siendo utilizado",Response::HTTP_UNPROCESSABLE_ENTITY);
         }*/
         //return $exception;
         return parent::render($request, $exception);

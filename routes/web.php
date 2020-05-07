@@ -18,6 +18,7 @@ $router->get('/', function () use ($router) {
 
 $router->get('api/posts',"PostController@index");
 $router->get('api/posts/{id}',"PostController@show");
+$router->get('api/posts/categoria/{idCategoria}', "PostController@showByCategory");
 
 $router->get('api/categorias','CategoriasController@index');
 $router->get('api/categorias/{id}','CategoriasController@show');

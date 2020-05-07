@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use App\Http\Resources\EncuestaCollection;
 use App\Encuesta;
 use App\Respuesta;
@@ -23,7 +24,17 @@ class EncuestaController extends Controller{
      * ),
      */
     public function index(){
-        return new EncuestaCollection(Encuesta::take(10)->orderBy('id','desc')->get());
+        $ip = "127.0.0.1";
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];}
+         elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+         } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+         }
+        $arrayExceptEncuestas = data_get(Respuesta::select('encuesta_id')->where('ip_cliente',$ip)->get(),'*.encuesta_id');
+        
+        return new EncuestaCollection(Encuesta::take(10)->orderBy('id','desc')->get()->except($arrayExceptEncuestas));
     }
 
     /**
@@ -81,7 +92,8 @@ class EncuestaController extends Controller{
         $respuesta->encuesta_id = $id;
         $respuesta->opcion_id = $request->input('opcion');
         $respuesta->comentario = $request->input('comentario');
+        $respuesta->ip_cliente = $request->ip;
         $respuesta->save();
-        return $request->ip();
+        return $respuesta;
     }
 }

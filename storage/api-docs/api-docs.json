@@ -243,6 +243,35 @@
                 }
             }
         },
+        "/api/posts/categoria/{idCategoria}": {
+            "get": {
+                "tags": [
+                    "Noticias"
+                ],
+                "operationId": "App\\Http\\Controllers\\PostController::showByCategory",
+                "parameters": [
+                    {
+                        "name": "idCategoria",
+                        "in": "path",
+                        "description": "La id de la categoria de las noticias a mostrar",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna todas las noticias filtradas por el id de la categoria",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/vistas": {
             "get": {
                 "tags": [
