@@ -6,6 +6,7 @@ use App\Http\Resources\Json\PostsJson;
 use App\Http\Resources\PostsCategoriaCollection;
 use App\Http\Resources\PostsCollection;
 use App\Post;
+use Illuminate\Support\Facades\Log;
 use App\Vista;
 use Victorybiz\GeoIPLocation\GeoIPLocation;
 
@@ -57,11 +58,12 @@ class PostController extends Controller {
 			$ip = $_SERVER['REMOTE_ADDR'];
 		}
 		if ($ip == "127.0.0.1") {
-			$ip = "201.44.81.39";
+			$ip = "181.94.228.76";
 		}
 		$geoip = new GeoIPLocation();
-		$geoip->setIP($ip);
-		$idCountry = (Country::where('code', $geoip->getCountryCode())->first())->id;
+		$geoip->setIP("127.0.0.1");
+		Log::info($geoip->getCountryCode());
+		$idCountry = 1;//(Country::where('code', $geoip->getCountryCode())->first())->id;
 		$post = Post::findOrFail($id);
 		$vistas = new Vista;
 		$vistas->id = null;
